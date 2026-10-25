@@ -34,7 +34,15 @@ folder next to where you start the server (change it with `-files`).
 | `-backup PATH` | | write a consistent DB copy (`VACUUM INTO`) and exit |
 
 For production see `deploy/` (systemd unit and an nginx config with long-poll
-and upload settings). Back up the `files/` folder together with the database. Web Crypto requires a secure context, so serve it over HTTPS
+and upload settings). `deploy/install.sh` sets both up from a GitHub release
+(tag `v*` to publish one):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/alireza-hariri/emerchat/main/deploy/install.sh \
+  | sudo bash -s -- --domain chat.example.com --nginx
+```
+
+Run it again without flags to upgrade; it snapshots the database first. Back up the `files/` folder together with the database. Web Crypto requires a secure context, so serve it over HTTPS
 (or use `localhost`).
 
 ## Test
