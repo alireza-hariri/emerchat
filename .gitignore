@@ -1,0 +1,5 @@
+/emerchat
+*.db
+*.db-shm
+*.db-wal
+/files/

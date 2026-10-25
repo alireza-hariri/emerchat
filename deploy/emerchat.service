@@ -1,0 +1,30 @@
+[Unit]
+Description=emerchat
+After=network.target
+
+[Service]
+Type=simple
+User=emerchat
+Group=emerchat
+WorkingDirectory=/var/lib/emerchat
+ExecStart=/usr/local/bin/emerchat -addr 127.0.0.1:8080 -db /var/lib/emerchat/emerchat.db \
+    -base-url https://chat.example.com -trust-proxy -secure-cookies
+Restart=on-failure
+RestartSec=2
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ReadWritePaths=/var/lib/emerchat
+StateDirectory=emerchat
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target
